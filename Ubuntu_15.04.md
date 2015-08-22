@@ -32,8 +32,9 @@ styles.lessUbuntu 15.04 安裝筆記
   1. 解開壓縮檔到 ~/Applications
 
   2. 設定 link ，令 Terminal 也能啟動 code :
-
+      ```
       $ sudo ln -s ~/Applications/VSCode-linux-x64/Code /usr/local/bin/code
+      ```
 
 # 設定 IP
 
@@ -49,6 +50,9 @@ styles.lessUbuntu 15.04 安裝筆記
   ```
 
   2. 修改設定檔
+  
+     使用編輯器軟體，修改「設定檔」。
+     
   ```
     $ sudo code /etc/samba/smbd.conf
   ```
@@ -62,8 +66,9 @@ styles.lessUbuntu 15.04 安裝筆記
 遇到上述的問題時，可在「終端機」透過以下的指令，將「文泉驛正黑」中文字型，再安裝到作業系統中。
 
 ```
-  sudo apt-get install ttf-wqy-zenhei
-  sudo fc-cache -v
+  $ sudo apt-get install ttf-wqy-zenhei
+  
+  $ sudo fc-cache -v
 ```
 
 【註】：在 Ubuntu 內附的「字型檢視程式」中，「文泉驛正黑」中文字型的「字型名稱」為：WenQuanYi Zen Hei 。﻿
