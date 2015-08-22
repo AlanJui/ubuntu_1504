@@ -173,3 +173,53 @@ To git@github.com:AlanJui/ubuntu_1504.git
  * [new branch]      master -> master
 Branch master set up to track remote branch master from origin.
 ```
+
+## 加入 git
+
+```
+alanjui@SRV01:~/workspace/Ubuntu_1504$ git push -u origin master
+Warning: Permanently added the RSA host key for IP address '192.30.252.131' to the list of known hosts.
+Counting objects: 42, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (37/37), done.
+Writing objects: 100% (42/42), 37.36 KiB | 0 bytes/s, done.
+Total 42 (delta 9), reused 0 (delta 0)
+To git@github.com:AlanJui/ubuntu_1504.git
+ * [new branch]      master -> master
+Branch master set up to track remote branch master from origin.
+```
+
+```
+alanjui@SRV01:~/workspace/Ubuntu_1504$ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	git/
+
+nothing added to commit but untracked files present (use "git add" to track)
+```
+
+```
+alanjui@SRV01:~/workspace/Ubuntu_1504$ git add .
+
+alanjui@SRV01:~/workspace/Ubuntu_1504$ git commit -m "加入 git 安裝、設定及操作"[master 2393073] 加入 git 安裝、設定及操作
+ 1 file changed, 175 insertions(+)
+ create mode 100644 git/git.md
+
+alanjui@SRV01:~/workspace/Ubuntu_1504$ git push origin master
+Warning: Permanently added the RSA host key for IP address '192.30.252.130' to the list of known hosts.
+Counting objects: 4, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (4/4), 2.39 KiB | 0 bytes/s, done.
+Total 4 (delta 1), reused 0 (delta 0)
+To git@github.com:AlanJui/ubuntu_1504.git
+   02ed0a1..2393073  master -> master
+
+alanjui@SRV01:~/workspace/Ubuntu_1504$ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+nothing to commit, working directory clean
+```

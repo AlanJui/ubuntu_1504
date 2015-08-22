@@ -29,6 +29,35 @@ $ source /etc/profile.d/rvm.sh
 
 (3) Restart your session (logout and login).
 
+執行安裝指令： __rvm install ruby__
+
 ```
-rvm install ruby
+alanjui@SRV01:~$ rvm install ruby
+Searching for binary rubies, this might take some time.
+No binary rubies available for: ubuntu/15.04/x86_64/ruby-2.2.1.
+Continuing with compilation. Please read 'rvm help mount' to get more information on binary rubies.
+Checking requirements for ubuntu.
+Requirements installation successful.
+Installing Ruby from source to: /usr/share/rvm/rubies/ruby-2.2.1, this may take a while depending on your cpu(s)...
+ruby-2.2.1 - #downloading ruby-2.2.1, this may take a while depending on your connection...
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:--  0:00:01 --:--:--     0Warning: Failed to create the file ruby-2.2.1.tar.bz2.part:
+Warning: 拒絕不符權限的操作
+curl: (23) Failed writing body (0 != 999)
+There was an error(23).
+Checking fallback: http://ftp.ruby-lang.org/pub/ruby/2.2/ruby-2.2.1.tar.bz2
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0Warning: Failed to create the file ruby-2.2.1.tar.bz2.part:
+Warning: 拒絕不符權限的操作
+curl: (23) Failed writing body (0 != 4007)
+There was an error(23).
+Failed download
+There has been an error fetching the ruby interpreter. Halting the installation.
+
 ```
+
+重新開機，再執行安裝指令。
+
+![操作畫面](file:///_imgs/螢幕快照 2015-08-22 11:32:25.png)
