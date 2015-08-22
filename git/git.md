@@ -223,3 +223,124 @@ On branch master
 Your branch is up-to-date with 'origin/master'.
 nothing to commit, working directory clean
 ```
+
+# git 應用場景
+
+## 無法執行 push 指令，因為有別人先 push
+
+1. 執行 push 指令，卻發現執行結果異常。
+
+ * 檢查 git 館納管狀態
+
+  ```
+  alanjui@SRV01:~/workspace/Ubuntu_1504$ git status
+  On branch master
+  Your branch is up-to-date with 'origin/master'.
+  Changes to be committed:
+    (use "git reset HEAD <file>..." to unstage)
+
+  	modified:   NodeJS/RVM_Ruby.md
+  	modified:   git/git.md
+
+  Changes not staged for commit:
+    (use "git add <file>..." to update what will be committed)
+    (use "git checkout -- <file>..." to discard changes in working directory)
+
+  	modified:   NodeJS/RVM_Ruby.md
+
+  Untracked files:
+    (use "git add <file>..." to include in what will be committed)
+
+  	NodeJS/_imgs/
+  	_imgs/
+    ```
+
+  * 將有變更的檔案，未納管的檔案設成「納管 (added)」狀態。
+
+  ```
+  alanjui@SRV01:~/workspace/Ubuntu_1504$ git add NodeJS/RVM_Ruby.md _imgs/ NodeJS/_imgs/
+  alanjui@SRV01:~/workspace/Ubuntu_1504$ git status
+  On branch master
+  Your branch is up-to-date with 'origin/master'.
+  Changes to be committed:
+    (use "git reset HEAD <file>..." to unstage)
+
+  	modified:   NodeJS/RVM_Ruby.md
+  	new file:   "NodeJS/_imgs/\350\236\242\345\271\225\345\277\253\347\205\247 2015-08-22 11:32:25.png"
+  	new file:   "_imgs/\350\236\242\345\271\225\345\277\253\347\205\247 2015-08-22 11:32:25.png"
+  	modified:   git/git.md
+  ```
+
+  * 將有變更的檔案，未納管的檔案設成「待簽入 (staged)」狀態。
+
+  ```
+  alanjui@SRV01:~/workspace/Ubuntu_1504$ git commit -m "加入Ruby安裝操作"
+  [master 69b6df8] 加入Ruby安裝操作
+   4 files changed, 80 insertions(+), 1 deletion(-)
+   create mode 100644 "NodeJS/_imgs/\350\236\242\345\271\225\345\277\253\347\205\247 2015-08-22 11:32:25.png"
+   create mode 100644 "_imgs/\350\236\242\345\271\225\345\277\253\347\205\247 2015-08-22 11:32:25.png"
+   ```
+
+  * 再次檢查 git 館納管狀態
+
+   ```
+  alanjui@SRV01:~/workspace/Ubuntu_1504$ git status
+  On branch master
+  Your branch is ahead of 'origin/master' by 1 commit.
+    (use "git push" to publish your local commits)
+  nothing to commit, working directory clean
+  ```
+
+  * 執行 push 指令，欲將 git 館納管項目，存入遠端 git 館，卻發生執行異常。
+
+  ```
+  alanjui@SRV01:~/workspace/Ubuntu_1504$ git push origin master
+  To git@github.com:AlanJui/ubuntu_1504.git
+   ! [rejected]        master -> master (fetch first)
+  error: failed to push some refs to 'git@github.com:AlanJui/ubuntu_1504.git'
+  hint: Updates were rejected because the remote contains work that you do
+  hint: not have locally. This is usually caused by another repository pushing
+  hint: to the same ref. You may want to first integrate the remote changes
+  hint: (e.g., 'git pull ...') before pushing again.
+  hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+  ```
+
+2. 執行 pull 指令，解決衝突問題。
+
+    ```
+    alanjui@SRV01:~/workspace/Ubuntu_1504$ git pull
+    Warning: Permanently added the RSA host key for IP address '192.30.252.128' to the list of known hosts.
+    remote: Counting objects: 7, done.
+    remote: Compressing objects: 100% (4/4), done.
+    remote: Total 7 (delta 4), reused 6 (delta 3), pack-reused 0
+    Unpacking objects: 100% (7/7), done.
+    From github.com:AlanJui/ubuntu_1504
+       2393073..e2e5f08  master     -> origin/master
+    Merge made by the 'recursive' strategy.
+     Styles.css      | 337 +++++++++++++++++++++++++++++++++++++++++++++++++++++++-
+     Ubuntu_15.04.md |  11 +-
+     2 files changed, 343 insertions(+), 5 deletions(-)
+    ```
+
+    **註：在指令執行的過程中，會出现一個對話畫面，要求使用者說明為何要將「遠端 git 館」併入的理由。**
+
+3. 檢查 git 館的使用狀態。
+    ```
+    alanjui@SRV01:~/workspace/Ubuntu_1504$ git status
+    On branch master
+    Your branch is ahead of 'origin/master' by 2 commits.
+      (use "git push" to publish your local commits)
+    nothing to commit, working directory clean
+    ```
+
+4. 再次執行 push 指令。
+    ```
+    alanjui@SRV01:~/workspace/Ubuntu_1504$ git push origin master
+    Counting objects: 10, done.
+    Delta compression using up to 8 threads.
+    Compressing objects: 100% (9/9), done.
+    Writing objects: 100% (10/10), 629.32 KiB | 0 bytes/s, done.
+    Total 10 (delta 3), reused 0 (delta 0)
+    To git@github.com:AlanJui/ubuntu_1504.git
+       e2e5f08..cd521bb  master -> master
+    ```
