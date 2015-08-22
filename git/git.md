@@ -1,236 +1,238 @@
 git 安裝及使用
 ===========
 
-# SSH
+# SSH 安裝及設定
 
-(1) 安裝 ssh
+1. 安裝 ssh
 
-```
-$ sudo apt-get install openssh-server openssh-client
-```
+  ```
+  $ sudo apt-get install openssh-server openssh-client
+  ```
 
-(2) 製作 ssh key pair
+2. 製作 ssh 公私鑰對
 
-```
-alanjui@SRV01:~$ ssh-keygen
-Generating public/private rsa key pair.
-Enter file in which to save the key (/home/alanjui/.ssh/id_rsa): /home/alanjui/.ssh/srv01_alanjui
-Enter passphrase (empty for no passphrase):
-Enter same passphrase again:
-Your identification has been saved in /home/alanjui/.ssh/srv01_alanjui.
-Your public key has been saved in /home/alanjui/.ssh/srv01_alanjui.pub.
-The key fingerprint is:
-ed:68:21:96:7a:4d:e4:58:53:38:70:c2:ff:59:6d:97 alanjui@SRV01
-The key's randomart image is:
-+---[RSA 2048]----+
-|     .o....      |
-|      .oo.       |
-|       .+.   .  .|
-|       *.o  . oE.|
-|      = S..o . . |
-|     o + +o      |
-|    . . + .      |
-|     . .         |
-|                 |
-+-----------------+
-alanjui@SRV01:~$
-```
+  ```
+  alanjui@SRV01:~$ ssh-keygen
+  Generating public/private rsa key pair.
+  Enter file in which to save the key (/home/alanjui/.ssh/id_rsa): /home/alanjui/.ssh/srv01_alanjui
+  Enter passphrase (empty for no passphrase):
+  Enter same passphrase again:
+  Your identification has been saved in /home/alanjui/.ssh/srv01_alanjui.
+  Your public key has been saved in /home/alanjui/.ssh/srv01_alanjui.pub.
+  The key fingerprint is:
+  ed:68:21:96:7a:4d:e4:58:53:38:70:c2:ff:59:6d:97 alanjui@SRV01
+  The key's randomart image is:
+  +---[RSA 2048]----+
+  |     .o....      |
+  |      .oo.       |
+  |       .+.   .  .|
+  |       *.o  . oE.|
+  |      = S..o . . |
+  |     o + +o      |
+  |    . . + .      |
+  |     . .         |
+  |                 |
+  +-----------------+
+  alanjui@SRV01:~$
+  ```
 
-# git
+# git 基本操作
 
 ## 建立個人識別
-```
-alanjui@SRV01:~/workspace/Ubuntu_1504$ git config --global user.email "alanjui.1960@gamil.com"
+  ```
+  alanjui@SRV01:~/workspace/Ubuntu_1504$ git config --global user.email "alanjui.1960@gamil.com"
 
-alanjui@SRV01:~/workspace/Ubuntu_1504$ git config --global user.name "Alan Jui"
-```
+  alanjui@SRV01:~/workspace/Ubuntu_1504$ git config --global user.name "Alan Jui"
+  ```
 
-註：未建立個人識別，執行commit會遇見的錯誤狀況-
-```
-alanjui@SRV01:~/workspace/Ubuntu_1504$ git commit -m "First commit"
+  __註：未先建立個人識別，就直 接執行 commit 指令，將遭遇如下所示的錯誤狀況。__
 
-*** Please tell me who you are.
+  ```
+  alanjui@SRV01:~/workspace/Ubuntu_1504$ git commit -m "First commit"
 
-Run
+  *** Please tell me who you are.
 
-  git config --global user.email "you@example.com"
-  git config --global user.name "Your Name"
+  Run
 
-to set your account's default identity.
-Omit --global to set the identity only in this repository.
+    git config --global user.email "you@example.com"
+    git config --global user.name "Your Name"
 
-fatal: unable to auto-detect email address (got 'alanjui@SRV01.(none)')
+  to set your account's default identity.
+  Omit --global to set the identity only in this repository.
 
-```
-## 建立 git 館並放入 GitHub
+  fatal: unable to auto-detect email address (got 'alanjui@SRV01.(none)')
+  ```
 
-(1) 建立 README 檔案
-```
-alanjui@SRV01:~/workspace/Ubuntu_1504$ echo "# Ubuntu 15.04" >> README.md
-```
+## 首次納管
 
-(2) 建立 git 館
-```
-alanjui@SRV01:~/workspace/Ubuntu_1504$ git init
-Initialized empty Git repository in /home/alanjui/workspace/Ubuntu_1504/.git/
-```
+建立容器並存入遠端容器（GitHub）。
 
-(3) 將所有待簽入的檔案，設定成 staged 狀態
-```
-alanjui@SRV01:~/workspace/Ubuntu_1504$ git add .
-```
+1. 建立 README 檔案
+    ```
+    alanjui@SRV01:~/workspace/Ubuntu_1504$ echo "# Ubuntu 15.04" >> README.md
+    ```
 
-(4) 簽入 git 館
-```
-alanjui@SRV01:~/workspace/Ubuntu_1504$ git commit -m "First commit"
+2. 建立容器
+    ```
+    alanjui@SRV01:~/workspace/Ubuntu_1504$ git init
+    Initialized empty Git repository in /home/alanjui/workspace/Ubuntu_1504/.git/
+    ```
 
-*** Please tell me who you are.
+3. 將所有待簽入的檔案，設定成 staged 狀態
+    ```
+    alanjui@SRV01:~/workspace/Ubuntu_1504$ git add .
+    ```
 
-Run
+4. 簽入容器
 
-  git config --global user.email "you@example.com"
-  git config --global user.name "Your Name"
+   * 執行簽入指令： commit
 
-to set your account's default identity.
-Omit --global to set the identity only in this repository.
+  ```
+  alanjui@SRV01:~/workspace/Ubuntu_1504$ git commit -m "First commit"
 
-fatal: unable to auto-detect email address (got
-  'alanjui@SRV01.(none)')
-```
+  *** Please tell me who you are.
 
-上述指令執行失敗，因為尚未在 git 建立個人識別。
+  Run
 
-```
-alanjui@SRV01:~/workspace/Ubuntu_1504$ git config --global user.email "alanjui.1960@gamil.com"
+    git config --global user.email "you@example.com"
+    git config --global user.name "Your Name"
 
-alanjui@SRV01:~/workspace/Ubuntu_1504$ git config --global user.name "Alan Jui"
-```
+  to set your account's default identity.
+  Omit --global to set the identity only in this repository.
 
-建立個個識別後，再度簽入。
-```
-alanjui@SRV01:~/workspace/Ubuntu_1504$ git commit -m "First commit"[master (root-commit) f6b8fec] First commit
- 30 files changed, 2486 insertions(+)
- create mode 100755 .DS_Store
- create mode 100755 ._.DS_Store
- create mode 100755 Google Cloud/.DS_Store
- create mode 100755 Google Cloud/._.DS_Store
- create mode 100755 "Google Cloud/._Google Cloud Platform \350\250\230\344\272\213\346\234\254.md"
- create mode 100755 "Google Cloud/Google Cloud Platform \350\250\230\344\272\213\346\234\254.md"
- create mode 100755 Google Cloud/Styles.css
- create mode 100644 Google Cloud/_tmp_Ubuntu/ErrorMsg.md
- create mode 100644 "MongoDB/\345\256\211\350\243\235MongoDB.md"
- create mode 100644 Network/SSH.md
- create mode 100644 "Network/\345\246\202\344\275\225\346\211\213\345\213\225\345\256\211\350\243\235\347\266\262\350\267\257.md"
- create mode 100644 NodeJS/NodeJS.md
- create mode 100644 NodeJS/RVM_Ruby.md
- create mode 100644 README.md
- create mode 100755 Samba/.DS_Store
- create mode 100755 Samba/._.DS_Store
- create mode 100755 Samba/Samba.md
- create mode 100755 Samba/smb.conf
- create mode 100644 Samba/smb.conf.v0.1
- create mode 100755 Samba/smb.conf.v0.2a
- create mode 100644 Samba/smb.conf.v0.3
- create mode 100755 Styles.css
- create mode 100755 "Ubuntu  15.04 \344\270\255\346\226\207\345\255\227\351\253\224.odt"
- create mode 100755 Ubuntu_15.04.md
- create mode 100755 VirtualBox/My_VirbualBox_Note.md
- create mode 100644 VirtualBox/VirtualBox.xml.backup
- create mode 100644 VirtualBox/Win-Vista.vbox.backup
- create mode 100644 VirtualBox/Win10.vbox.backup
- create mode 100644 VirtualBox/Win7.vbox.backup
- create mode 100644 atom/styles.less.v0.1
-```
+  fatal: unable to auto-detect email address (got
+    'alanjui@SRV01.(none)')
+  ```
 
-(5) 置入遠端 git 館
+   * 指令未能完成執行，是因為尚未在 git 建立個人識別。故以下列指令，先完成個人識別建立。
 
-執行置入指令：  __git push -u origin master__
-```
-alanjui@SRV01:~/workspace/Ubuntu_1504$ git push -u origin master
-The authenticity of host 'github.com (192.30.252.129)' can't be established.
-RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48.
-Are you sure you want to continue connecting (yes/no)? yes
-Warning: Permanently added 'github.com,192.30.252.129' (RSA) to the list of known hosts.
-Permission denied (publickey).
-fatal: Could not read from remote repository.
+  ```
+  alanjui@SRV01:~/workspace/Ubuntu_1504$ git config --global user.email "alanjui.1960@gamil.com"
 
-Please make sure you have the correct access rights
-and the repository exists.
-```
+  alanjui@SRV01:~/workspace/Ubuntu_1504$ git config --global user.name "Alan Jui"
+  ```
 
-指令執行未成功，因個人的 Public ssh key 未在 GitHub 完成註冊
+    * 完成個人識別建立後，再度簽入。
 
-待完成註冊後，再執行指令。
-```
-alanjui@SRV01:~/workspace/Ubuntu_1504$ git push -u origin master
-Warning: Permanently added the RSA host key for IP address '192.30.252.131' to the list of known hosts.
-Counting objects: 42, done.
-Delta compression using up to 8 threads.
-Compressing objects: 100% (37/37), done.
-Writing objects: 100% (42/42), 37.36 KiB | 0 bytes/s, done.
-Total 42 (delta 9), reused 0 (delta 0)
-To git@github.com:AlanJui/ubuntu_1504.git
- * [new branch]      master -> master
-Branch master set up to track remote branch master from origin.
-```
+  ```
+  alanjui@SRV01:~/workspace/Ubuntu_1504$ git commit -m "First commit"[master (root-commit) f6b8fec] First commit
+   30 files changed, 2486 insertions(+)
+   create mode 100755 .DS_Store
+   create mode 100755 ._.DS_Store
+   create mode 100755 Google Cloud/.DS_Store
+   create mode 100755 Google Cloud/._.DS_Store
+   create mode 100755 "Google Cloud/._Google Cloud Platform \350\250\230\344\272\213\346\234\254.md"
+   create mode 100755 "Google Cloud/Google Cloud Platform \350\250\230\344\272\213\346\234\254.md"
+   create mode 100755 Google Cloud/Styles.css
+   create mode 100644 Google Cloud/_tmp_Ubuntu/ErrorMsg.md
+   create mode 100644 "MongoDB/\345\256\211\350\243\235MongoDB.md"
+   create mode 100644 Network/SSH.md
+   create mode 100644 "Network/\345\246\202\344\275\225\346\211\213\345\213\225\345\256\211\350\243\235\347\266\262\350\267\257.md"
+   create mode 100644 NodeJS/NodeJS.md
+   create mode 100644 NodeJS/RVM_Ruby.md
+   create mode 100644 README.md
+   create mode 100755 Samba/.DS_Store
+   create mode 100755 Samba/._.DS_Store
+   create mode 100755 Samba/Samba.md
+   create mode 100755 Samba/smb.conf
+   create mode 100644 Samba/smb.conf.v0.1
+   create mode 100755 Samba/smb.conf.v0.2a
+   create mode 100644 Samba/smb.conf.v0.3
+   create mode 100755 Styles.css
+   create mode 100755 "Ubuntu  15.04 \344\270\255\346\226\207\345\255\227\351\253\224.odt"
+   create mode 100755 Ubuntu_15.04.md
+   create mode 100755 VirtualBox/My_VirbualBox_Note.md
+   create mode 100644 VirtualBox/VirtualBox.xml.backup
+   create mode 100644 VirtualBox/Win-Vista.vbox.backup
+   create mode 100644 VirtualBox/Win10.vbox.backup
+   create mode 100644 VirtualBox/Win7.vbox.backup
+   create mode 100644 atom/styles.less.v0.1
+  ```
 
-## 加入 git
+5. 存入遠端容器
 
-```
-alanjui@SRV01:~/workspace/Ubuntu_1504$ git push -u origin master
-Warning: Permanently added the RSA host key for IP address '192.30.252.131' to the list of known hosts.
-Counting objects: 42, done.
-Delta compression using up to 8 threads.
-Compressing objects: 100% (37/37), done.
-Writing objects: 100% (42/42), 37.36 KiB | 0 bytes/s, done.
-Total 42 (delta 9), reused 0 (delta 0)
-To git@github.com:AlanJui/ubuntu_1504.git
- * [new branch]      master -> master
-Branch master set up to track remote branch master from origin.
-```
+    * 執行置入指令：  __git push -u origin master__
 
-```
-alanjui@SRV01:~/workspace/Ubuntu_1504$ git status
-On branch master
-Your branch is up-to-date with 'origin/master'.
-Untracked files:
-  (use "git add <file>..." to include in what will be committed)
+  ```
+  alanjui@SRV01:~/workspace/Ubuntu_1504$ git push -u origin master
+  The authenticity of host 'github.com (192.30.252.129)' can't be established.
+  RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48.
+  Are you sure you want to continue connecting (yes/no)? yes
+  Warning: Permanently added 'github.com,192.30.252.129' (RSA) to the list of known hosts.
+  Permission denied (publickey).
+  fatal: Could not read from remote repository.
 
-	git/
+  Please make sure you have the correct access rights
+  and the repository exists.
+  ```
 
-nothing added to commit but untracked files present (use "git add" to track)
-```
+  __註：指令執行未能成功，是因個人的 Public ssh key 未在 GitHub 完成註冊__
 
-```
-alanjui@SRV01:~/workspace/Ubuntu_1504$ git add .
+    * 待完成註冊後，再執行指令。
 
-alanjui@SRV01:~/workspace/Ubuntu_1504$ git commit -m "加入 git 安裝、設定及操作"[master 2393073] 加入 git 安裝、設定及操作
- 1 file changed, 175 insertions(+)
- create mode 100644 git/git.md
+  ```
+  alanjui@SRV01:~/workspace/Ubuntu_1504$ git push -u origin master
+  Warning: Permanently added the RSA host key for IP address '192.30.252.131' to the list of known hosts.
+  Counting objects: 42, done.
+  Delta compression using up to 8 threads.
+  Compressing objects: 100% (37/37), done.
+  Writing objects: 100% (42/42), 37.36 KiB | 0 bytes/s, done.
+  Total 42 (delta 9), reused 0 (delta 0)
+  To git@github.com:AlanJui/ubuntu_1504.git
+   * [new branch]      master -> master
+  Branch master set up to track remote branch master from origin.
+  ```
 
-alanjui@SRV01:~/workspace/Ubuntu_1504$ git push origin master
-Warning: Permanently added the RSA host key for IP address '192.30.252.130' to the list of known hosts.
-Counting objects: 4, done.
-Delta compression using up to 8 threads.
-Compressing objects: 100% (3/3), done.
-Writing objects: 100% (4/4), 2.39 KiB | 0 bytes/s, done.
-Total 4 (delta 1), reused 0 (delta 0)
-To git@github.com:AlanJui/ubuntu_1504.git
-   02ed0a1..2393073  master -> master
+## 再次納管
 
-alanjui@SRV01:~/workspace/Ubuntu_1504$ git status
-On branch master
-Your branch is up-to-date with 'origin/master'.
-nothing to commit, working directory clean
-```
+添加新的檔案：或是檔案變更了內容後，再次納管到容器。
 
-# git 應用場景
+1. 檢查容器中各檔案的納管狀態。
+
+  ```
+  alanjui@SRV01:~/workspace/Ubuntu_1504$ git status
+  On branch master
+  Your branch is up-to-date with 'origin/master'.
+  Untracked files:
+    (use "git add <file>..." to include in what will be committed)
+
+  	git/
+
+  nothing added to commit but untracked files present (use "git add" to track)
+  ```
+
+2. 將納管狀態為：「未追蹤（untracked）」的檔案，設成「已確認（committed）」狀態。、
+
+  ```
+  alanjui@SRV01:~/workspace/Ubuntu_1504$ git add .
+
+  alanjui@SRV01:~/workspace/Ubuntu_1504$ git commit -m "加入 git 安裝、設定及操作"[master 2393073] 加入 git 安裝、設定及操作
+   1 file changed, 175 insertions(+)
+   create mode 100644 git/git.md
+
+  alanjui@SRV01:~/workspace/Ubuntu_1504$ git push origin master
+  Warning: Permanently added the RSA host key for IP address '192.30.252.130' to the list of known hosts.
+  Counting objects: 4, done.
+  Delta compression using up to 8 threads.
+  Compressing objects: 100% (3/3), done.
+  Writing objects: 100% (4/4), 2.39 KiB | 0 bytes/s, done.
+  Total 4 (delta 1), reused 0 (delta 0)
+  To git@github.com:AlanJui/ubuntu_1504.git
+     02ed0a1..2393073  master -> master
+
+  alanjui@SRV01:~/workspace/Ubuntu_1504$ git status
+  On branch master
+  Your branch is up-to-date with 'origin/master'.
+  nothing to commit, working directory clean
+  ```
+
+# git 異常狀況處理
 
 ## 無法執行 push 指令，因為有別人先 push
 
 1. 執行 push 指令，卻發現執行結果異常。
 
- * 檢查 git 館納管狀態
+ * 檢查納管狀態
 
   ```
   alanjui@SRV01:~/workspace/Ubuntu_1504$ git status
@@ -255,7 +257,7 @@ nothing to commit, working directory clean
   	_imgs/
     ```
 
-  * 將有變更的檔案，未納管的檔案設成「納管 (added)」狀態。
+  * 將納管狀態為：「已變更（modified）」的檔案，設成「已確認（committed）」狀態。
 
   ```
   alanjui@SRV01:~/workspace/Ubuntu_1504$ git add NodeJS/RVM_Ruby.md _imgs/ NodeJS/_imgs/
@@ -271,7 +273,7 @@ nothing to commit, working directory clean
   	modified:   git/git.md
   ```
 
-  * 將有變更的檔案，未納管的檔案設成「待簽入 (staged)」狀態。
+  * 將納管狀態為：「已確認（committed）」的檔案，成立新版本。檔案的納管狀態，會被設成「已納管（staged）」狀態。
 
   ```
   alanjui@SRV01:~/workspace/Ubuntu_1504$ git commit -m "加入Ruby安裝操作"
@@ -281,7 +283,7 @@ nothing to commit, working directory clean
    create mode 100644 "_imgs/\350\236\242\345\271\225\345\277\253\347\205\247 2015-08-22 11:32:25.png"
    ```
 
-  * 再次檢查 git 館納管狀態
+  * 再次檢查容器中各檔案的納管狀態
 
    ```
   alanjui@SRV01:~/workspace/Ubuntu_1504$ git status
@@ -291,7 +293,7 @@ nothing to commit, working directory clean
   nothing to commit, working directory clean
   ```
 
-  * 執行 push 指令，欲將 git 館納管項目，存入遠端 git 館，卻發生執行異常。
+  * 執行 push 指令，將本端容器己納管的項目，存入遠端容器。結果，卻發生指令執行異常。
 
   ```
   alanjui@SRV01:~/workspace/Ubuntu_1504$ git push origin master
@@ -322,9 +324,9 @@ nothing to commit, working directory clean
      2 files changed, 343 insertions(+), 5 deletions(-)
     ```
 
-    **註：在指令執行的過程中，會出现一個對話畫面，要求使用者說明為何要將「遠端 git 館」併入的理由。**
+    **註：在指令執行的過程中，會出现一個對話畫面，要求使用者說明為何要將「遠端容器」併入的理由。**
 
-3. 檢查 git 館的使用狀態。
+3. 檢查容器中各檔案的納管狀態。
     ```
     alanjui@SRV01:~/workspace/Ubuntu_1504$ git status
     On branch master
