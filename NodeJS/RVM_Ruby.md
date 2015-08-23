@@ -60,4 +60,4 @@ There has been an error fetching the ruby interpreter. Halting the installation.
 
 重新開機，再執行安裝指令。
 
-![操作畫面](file:///_imgs/螢幕快照 2015-08-22 11:32:25.png)
+![](../_imgs/RVM.png)
