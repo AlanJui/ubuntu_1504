@@ -75,48 +75,48 @@ Done installing documentation for sass after 4 seconds
 這並非必要安裝，但也可當成是 gem 是否已安裝；且能正常執行的驗證。
 
 1. 執行 gem 安裝指令
-```
-alanjui@SRV01:~$ gem install jekyll
-Fetching: fast-stemmer-1.0.2.gem (100%)
-Building native extensions.  This could take a while...
-Successfully installed fast-stemmer-1.0.2
-Fetching: classifier-reborn-2.0.3.gem (100%)
-Successfully installed classifier-reborn-2.0.3
-Fetching: ffi-1.9.10.gem (100%)
-Building native extensions.  This could take a while...
-Successfully installed ffi-1.9.10
-......
-......
-......
-Parsing documentation for liquid-2.6.3
-Installing ri documentation for liquid-2.6.3
-Parsing documentation for jekyll-2.5.3
-Installing ri documentation for jekyll-2.5.3
-Done installing documentation for fast-stemmer, classifier-reborn, ffi, rb-inotify, rb-fsevent, hitimes, timers, celluloid, listen, jekyll-watch, jekyll-sass-converter, execjs, coffee-script-source, coffee-script, jekyll-coffeescript, jekyll-gist, jekyll-paginate, blankslate, parslet, toml, redcarpet, posix-spawn, yajl-ruby, pygments.rb, colorator, safe_yaml, mercenary, kramdown, liquid, jekyll after 16 seconds
-30 gems installed
-```
+  ```
+  alanjui@SRV01:~$ gem install jekyll
+  Fetching: fast-stemmer-1.0.2.gem (100%)
+  Building native extensions.  This could take a while...
+  Successfully installed fast-stemmer-1.0.2
+  Fetching: classifier-reborn-2.0.3.gem (100%)
+  Successfully installed classifier-reborn-2.0.3
+  Fetching: ffi-1.9.10.gem (100%)
+  Building native extensions.  This could take a while...
+  Successfully installed ffi-1.9.10
+  ......
+  ......
+  ......
+  Parsing documentation for liquid-2.6.3
+  Installing ri documentation for liquid-2.6.3
+  Parsing documentation for jekyll-2.5.3
+  Installing ri documentation for jekyll-2.5.3
+  Done installing documentation for fast-stemmer, classifier-reborn, ffi, rb-inotify, rb-fsevent, hitimes, timers, celluloid, listen, jekyll-watch, jekyll-sass-converter, execjs, coffee-script-source, coffee-script, jekyll-coffeescript, jekyll-gist, jekyll-paginate, blankslate, parslet, toml, redcarpet, posix-spawn, yajl-ruby, pygments.rb, colorator, safe_yaml, mercenary, kramdown, liquid, jekyll after 16 seconds
+  30 gems installed
+  ```
 
 2. 建立 Jekyll 網站，並執行
 
-```
-alanjui@SRV01:~$ mkdir -p ~/workspace/jekyll
-alanjui@SRV01:~$ cd ~/workspace/jekyll
-alanjui@SRV01:~/workspace/jekyll$ jekyll new my-awesome-site
-New jekyll site installed in /home/alanjui/workspace/jekyll/my-awesome-site.
-alanjui@SRV01:~/workspace/jekyll$ cd my-awesome-site/
-alanjui@SRV01:~/workspace/jekyll/my-awesome-site$ jekyll serve
-Configuration file: /home/alanjui/workspace/jekyll/my-awesome-site/_config.yml
-            Source: /home/alanjui/workspace/jekyll/my-awesome-site
-       Destination: /home/alanjui/workspace/jekyll/my-awesome-site/_site
-      Generating...
-                    done.
- Auto-regeneration: enabled for '/home/alanjui/workspace/jekyll/my-awesome-site'
-Configuration file: /home/alanjui/workspace/jekyll/my-awesome-site/_config.yml
-    Server address: http://127.0.0.1:4000/
-  Server running... press ctrl-c to stop.
-```
+  ```
+  alanjui@SRV01:~$ mkdir -p ~/workspace/jekyll
+  alanjui@SRV01:~$ cd ~/workspace/jekyll
+  alanjui@SRV01:~/workspace/jekyll$ jekyll new my-awesome-site
+  New jekyll site installed in /home/alanjui/workspace/jekyll/my-awesome-site.
+  alanjui@SRV01:~/workspace/jekyll$ cd my-awesome-site/
+  alanjui@SRV01:~/workspace/jekyll/my-awesome-site$ jekyll serve
+  Configuration file: /home/alanjui/workspace/jekyll/my-awesome-site/_config.yml
+              Source: /home/alanjui/workspace/jekyll/my-awesome-site
+         Destination: /home/alanjui/workspace/jekyll/my-awesome-site/_site
+        Generating...
+                      done.
+   Auto-regeneration: enabled for '/home/alanjui/workspace/jekyll/my-awesome-site'
+  Configuration file: /home/alanjui/workspace/jekyll/my-awesome-site/_config.yml
+      Server address: http://127.0.0.1:4000/
+    Server running... press ctrl-c to stop.
+  ```
 
-![](../_imgs/jekyll-site.png)
+  ![](../_imgs/jekyll-site.png)
 
 # 參考資料
 
