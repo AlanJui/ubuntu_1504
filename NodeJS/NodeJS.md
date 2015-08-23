@@ -10,30 +10,47 @@ Node 筆記
     參考指引： [How to Install Node.js on Ubuntu 14.04 / Install Node.js with Standard Binary Packages ](http://www.hostingadvice.com/how-to/install-nodejs-ubuntu-14-04/)
 
 2. 執行安裝指令。
-
+    ```
 		cd ~/下載
 		sudo tar -C /usr/local --strip-components 1 -xzf node-v0.12.7-linux-x86.tar.gz
-
+    ```
 3. 驗證
 
 	* 步驟一：檢查連結
 
-			ls -l /usr/local/bin/node
-			ls -l /usr/local/bin/npm
+    ```
+  	ls -l /usr/local/bin/node
+  	ls -l /usr/local/bin/npm
+    ```
 
   * 步驟二：確認軟體能夠執行
-			node -v
-			npm -v
+
+    ```
+    node -v
+    npm -v
+    ```
 
 # 安裝常用之 node 模組
 
 ## Rebuild 工具
-
-		sudo npm install -g node-gyp
+  ```
+	sudo npm install -g node-gyp
+  ```
 
 ## HTTP Server
+  ```
+	sudo npm install -g http-server
+  ```
 
-		sudo npm install -g http-server
+## 測試工具 Mocha
+  ```
+	sudo npm install -g mocha
+  ```
+
+## 測試工具 Karma
+  ```
+	sudo npm install -g karma-cli
+  ```
 
 # 安裝 MongoDB
 
@@ -62,12 +79,116 @@ Node 筆記
 2. 驗證能夠正常執行
 
   執行下列指令，以驗證：
-
-			cd ~/workspace/nodeJS
-			mkdir myApp101 && cd $_
-			yo angular-fullstack myApp101
-
+  ```
+  cd ~/workspace/nodeJS  
+  mkdir myApp101 && cd $_  
+  yo angular-fullstack myApp101
+  ```  
 ### 安裝 hottowel Generator
+
+1. 執行 generator 安裝指令
+
+		sudo npm install -g generator-hottowel
+
+2. 驗證能夠正常執行
+
+  * 建立 project 目錄
+
+  ```
+  mkdir -p ~/workspace/vs-code && cd $_
+  mkdir helloWorld && cd $_  
+  ```
+
+  * 使用 hottowel generator 建立 project
+
+  ```
+  yo hottowel myApp101
+  ```  
+
+  * 執行 code 分析
+
+  ```
+  gulp vet
+  ```  
+
+  * 執行功能測試
+
+  ```
+  gulp serve-specs
+  ```  
+
+  * 執行開發中 App
+
+  ```
+  gulp serve
+  ```  
+
+  * 執行産品建製（build）
+
+  ```
+  gulp build
+  ```  
+
+  * 執行産品 App
+
+  ```
+  gulp serve-build
+  ```  
+
+## 安裝 mono
+
+Visual Studio Code 除錯時，需要 mono runtime 軟體配合，故需安裝。
+
+因為 Ubuntu 15.04 發行的套件軟體，其版本為 V3.2.8 ；但 Visual Studio Code 的最低限度要求為 V3.10.10 ，所以不能使用下列的指令直接安裝。
+
+~sudo apt-get install mono-complete~
+
+如果已安裝了錯誤的 mono 版本，請先執行以下的解除安裝指令，再安裝正確的新片本。
+
+```
+sudo apt-get uninnstall mono-complete
+```
+
+請改用 [Mono 官網](http://www.mono-project.com/docs/getting-started/install/linux/#debian-ubuntu-and-derivatives) 提供的版本，進行安裝作業。  
+
+1. 取得官網 deb 套件的 GPG 公鑰。
+
+    ```
+    sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+    ```
+2. 設定 Ubuntu 的套件來源
+
+    ```
+    echo "deb http://download.mono-project.com/repo/debian wheezy main" | sudo tee /etc/apt/sources.list.d/mono-xamarin.list
+    ```
+
+3. 更新 Ubuntu 套件來源清單
+    ```
+    sudo apt-get update
+    ```
+
+4. 安裝 mono 套件
+    ```
+    sudo apt-get uninnstall mono-complete
+    ```
+
+5. 驗證
+
+    __mono --version__
+  
+    ```
+    alanjui@SRV01:~/workspace/vs-code/helloWorld$ mono --version
+    Mono JIT compiler version 4.0.3 (Stable 4.0.3.20/d6946b4 Tue Aug  4 09:43:57 UTC 2015)
+    Copyright (C) 2002-2014 Novell, Inc, Xamarin Inc and Contributors. www.mono-project.com
+    	TLS:           __thread
+    	SIGSEGV:       altstack
+    	Notifications: epoll
+    	Architecture:  amd64
+    	Disabled:      none
+    	Misc:          softdebug
+    	LLVM:          supported, not enabled.
+    	GC:            sgen
+    ```
 
 
 # 異常處理
@@ -92,7 +213,7 @@ Node 筆記
 
 1. 執行下列安裝指令：
 
-  npm install mongoose
+        npm install mongoose
 
 2. 發生如下所示之錯誤狀況：
 
