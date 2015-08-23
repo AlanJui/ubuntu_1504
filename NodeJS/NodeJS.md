@@ -50,9 +50,9 @@ Node 筆記
 ### 安裝 [Angular Fullstack Generator](https://github.com/DaftMonk/generator-angular-fullstack)
 
 執行此工作之前，須先確認以下軟體已先完成安裝：
-		
+
  * MongoDB
-	 
+
  * Ruby & SASS
 
 1. 執行安裝指令
@@ -62,7 +62,7 @@ Node 筆記
 2. 驗證能夠正常執行
 
   執行下列指令，以驗證：
-		
+
 			cd ~/workspace/nodeJS
 			mkdir myApp101 && cd $_
 			yo angular-fullstack myApp101
@@ -72,19 +72,39 @@ Node 筆記
 
 # 異常處理
 
-## 無法正常啟動 app ，有錯誤訊息告知：「You need to have Ruby and Sass Installed and in your PATH for this task to work」	
+## 無法正常啟動 app ，有 Sass 相關錯誤狀況發生
+
+![](../_imgs/grunt-serve-sass.png)
+
+錯誤訊息告知：「You need to have Ruby and Sass Installed and in your PATH for this task to work」。
 
 這種狀況發生的導因，通常是因為忘了安裝 Sass ；而 Sass 的安裝係透過 gem 這個套件管理軟體來完成。所以，遇此狀況時，須先檢查 Ruby, gem, Sass 的安裝是否已完成。
 
+## 無法正常啟動 app ，有 MongoDB 相關錯誤狀況發生。
 
-## 無法正常啟動 app ，有錯誤訊息告知：「You need to have Ruby and Sass Installed and in your PATH for this task to work」	
+![](../_imgs/grunt-serve-mongodb-core-err.png)
 
 依錯誤訊息判斷，應該是 mongoose 這模組出狀況了，故須重新安裝 mongoose 模組。
 
-## 透過 npm install 安裝 mongoose 模組，結果無法順利安裝，有錯誤狀況發生
+## 安裝 mongoose 模組，發生錯誤狀況
 
-XXXX
+透過 npm install 安裝 mongoose 模組，結果無法順利安裝，有錯誤狀況發生。
 
+1. 執行下列安裝指令：
+
+  npm install mongoose
+
+2. 發生如下所示之錯誤狀況：
+
+  ![](../_imgs/npm-install-mongoose-err.png)
+
+3. 依據錯誤訊息的反應，問題導因出在目錄的使用權限。使用指令 ls -ld 查詢該目錄的權限，發覺目錄的擁有者竟是 root ，而不是正常的 alanjui 。
+
+  ![](../_imgs/npm_module_readable-stream.png)
+
+4. 使用指令，變更目錄的擁有者為 alanjui 所有，以改正問題。
+
+        sudo chown -R alanjui:alanjui /home/alanjui/.npm/readable-stream
 
 ## 懷疑 npm 模組在安裝的時候發生問題
 
@@ -92,6 +112,4 @@ XXXX
 
 這種狀況可能發生的時機，譬如：透過 Yeoman Generator 在建置 project 的時候，卻忘了先安裝 node-gyp 的模組。
 
-		rm -rf node_modules && npm install 
-		
-	
+		rm -rf node_modules && npm install
