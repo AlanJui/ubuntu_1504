@@ -346,3 +346,144 @@ git 安裝及使用
     To git@github.com:AlanJui/ubuntu_1504.git
        e2e5f08..cd521bb  master -> master
     ```
+
+## 檢查遠端容器是否己有版本異動
+
+1. 使用指令進行檢查。
+    ```
+    alanjui@SRV01:~/workspace/Ubuntu_1504$ git fetch
+    remote: Counting objects: 3, done.
+    remote: Compressing objects: 100% (1/1), done.
+    remote: Total 3 (delta 1), reused 3 (delta 1), pack-reused 0
+    Unpacking objects: 100% (3/3), done.
+    From github.com:AlanJui/ubuntu_1504
+       305705d..da02040  master     -> origin/master
+    ```
+
+2. 確認己有版本異動，使用指令與遠端容器進行同步。
+    ```
+    alanjui@SRV01:~/workspace/Ubuntu_1504$ git pull
+    Updating 305705d..da02040
+    Fast-forward
+     .gitignore | 1 +
+     1 file changed, 1 insertion(+)
+
+  ```
+  * 若是遠端容器沒有版本異動，檢查指令的執行結果會是一空白行，如下所示：
+
+  ```
+    alanjui@SRV01:~/workspace/Ubuntu_1504$ git fetch
+  alanjui@SRV01:~/workspace/Ubuntu_1504$
+  ```
+
+## 已納管的檔案改名
+
+在 RVM_Ruby.md 檔案內放入圖片。圖片的檔案在先前己納管，後來因為覺得命名不妥，將檔案名稱變更成 RVM.png 。
+
+1. 檢查容器內各檔案納管狀態。
+
+    ```
+  alanjui@SRV01:~/workspace/Ubuntu_1504$ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   NodeJS/RVM_Ruby.md
+	deleted:    "_imgs/\350\236\242\345\271\225\345\277\253\347\205\247 2015-08-22 11:32:25.png"
+	modified:   git/git.md
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	_imgs/RVM.png
+
+no changes added to commit (use "git add" and/or "git commit -a")
+  ```
+
+2. 將圖片新名稱的檔案，用 git add 指令，將檔案的納管狀態，設成「己追蹤」。
+    ```
+    alanjui@SRV01:~/workspace/Ubuntu_1504$ git add NodeJS/RVM_Ruby.md _imgs/RVM.png alanjui@SRV01:~/workspace/Ubuntu_1504$ git status
+    On branch master
+    Your branch is up-to-date with 'origin/master'.
+    Changes to be committed:
+      (use "git reset HEAD <file>..." to unstage)
+
+    	modified:   NodeJS/RVM_Ruby.md
+    	new file:   _imgs/RVM.png
+
+    Changes not staged for commit:
+      (use "git add/rm <file>..." to update what will be committed)
+      (use "git checkout -- <file>..." to discard changes in working directory)
+
+    	deleted:    "_imgs/\350\236\242\345\271\225\345\277\253\347\205\247 2015-08-22 11:32:25.png"
+    	modified:   git/git.md
+  ```
+
+  ```
+  alanjui@SRV01:~/workspace/Ubuntu_1504$ ls _imgs/
+  RVM.png  螢幕快照 2015-08-22 11:32:25.png
+  ```
+
+3. 將圖片的舊檔案，以 git rm 指令，指定不再納管。
+
+    ```
+    alanjui@SRV01:~/workspace/Ubuntu_1504$ git rm  _imgs/螢幕快照\ 2015-08-22\ 11\:32\:25.png
+    rm '_imgs/螢幕快照 2015-08-22 11:32:25.png'
+    alanjui@SRV01:~/workspace/Ubuntu_1504$ git status
+    On branch master
+    Your branch is up-to-date with 'origin/master'.
+    Changes to be committed:
+      (use "git reset HEAD <file>..." to unstage)
+
+    	modified:   NodeJS/RVM_Ruby.md
+    	new file:   _imgs/RVM.png
+    	deleted:    "_imgs/\350\236\242\345\271\225\345\277\253\347\205\247 2015-08-22 11:32:25.png"
+
+    Changes not staged for commit:
+      (use "git add <file>..." to update what will be committed)
+      (use "git checkout -- <file>..." to discard changes in working directory)
+
+    	modified:   git/git.md
+    ```
+
+4. 將變更檔案名稱的結果納管。
+
+    ```
+    alanjui@SRV01:~/workspace/Ubuntu_1504$ git commit -m "在 RVM 放入操作畫面圖片"
+    [master d7436b2] 在 RVM 放入操作畫面圖片
+     3 files changed, 1 insertion(+), 1 deletion(-)
+     create mode 100644 _imgs/RVM.png
+     delete mode 100644 "_imgs/\350\236\242\345\271\225\345\277\253\347\205\247 2015-08-22 11:32:25.png"
+    ```
+    __檢查資料夾，可發覺圖片的舊檔案已被刪除。__
+    ```
+    alanjui@SRV01:~/workspace/Ubuntu_1504$ ls _imgs/
+    RVM.png
+
+    alanjui@SRV01:~/workspace/Ubuntu_1504$ git status
+    On branch master
+    Your branch is ahead of 'origin/master' by 1 commit.
+      (use "git push" to publish your local commits)
+    Changes not staged for commit:
+      (use "git add <file>..." to update what will be committed)
+      (use "git checkout -- <file>..." to discard changes in working directory)
+
+    	modified:   git/git.md
+
+    no changes added to commit (use "git add" and/or "git commit -a")
+    ```
+
+5. 將容器的己納管項目，存入遠端容器。
+
+    ```
+    alanjui@SRV01:~/workspace/Ubuntu_1504$ git push origin master
+    Counting objects: 6, done.
+    Delta compression using up to 8 threads.
+    Compressing objects: 100% (5/5), done.
+    Writing objects: 100% (6/6), 180.81 KiB | 0 bytes/s, done.
+    Total 6 (delta 2), reused 0 (delta 0)
+    To git@github.com:AlanJui/ubuntu_1504.git
+       da02040..d7436b2  master -> master
+    ```
