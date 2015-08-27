@@ -235,3 +235,7 @@
   Deployed module [default] to [https://mybookshelf001.appspot.com]
   alanjui@SRV01:~/workspace/Google-Cloud/2-structured-data$
   ```
+
+  3. 驗證 App
+
+    使用 Web 瀏覽器，瀏覽網址： https://mybookshelf001.appspot.com/books
