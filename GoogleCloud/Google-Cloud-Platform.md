@@ -6,37 +6,40 @@ Google Cloud Platform 記事本
 
 # 安裝 Google Cloud SDK
 
-在用來開發的電腦，依據其作業系統，安裝 Google Cloud SDK 。
+在 Ubuntu 15.04 的電腦，安裝 Google Cloud SDK 。
 
-## Ubuntu 環境：
-
-安裝操作：
-
-__不要使用 Ubuntu 的安裝作法：
+安裝操作，__不要使用 Ubuntu 的安裝作法：
 [https://cloud.google.com/sdk/#debubu](https://cloud.google.com/sdk/#debubu)__
 
-改用 Linux / OS X 的安裝作法：
+而應改用 __Linux / OS X 的安裝作法：__
 
-1. Download and install Google Cloud SDK by running the following command in your shell or Terminal:
+1. 在「終端機」執行下列指令。
 
   ```
   curl https://sdk.cloud.google.com | bash
 	```
 
-	__安裝過程，系統詢問 GCloud SDK 的安裝處，使用預設，不要修改。__
+	__在安裝過程，當系統詢問 Google Cloud SDK 的安裝處時，就直接採用預設，不要修改。__
 
 	預設路俓： ~/google-cloud-sdk
 
-2. Restart your shell:
+2. 在「終端機」執行以下指令，以便重新設定 Shell 使用的「系統環境變數」:
 
   ```
 	exec -l $SHELL
   ```
 
-## Mac 環境：
+3. 將使用者帳號加入 docker 群組
 
-安裝操作：
-[https://cloud.google.com/sdk/](https://cloud.google.com/sdk/)
+  將使用者帳號： alanjui ，將入群組: docker 。
+
+  * 執行指令。
+
+  ```
+  sudo usermod -aG docker alanjui
+  ```
+
+  * 先「登出」，再「登入」，以便加入群組的設定生效。
 
 
 # 在 Google Developers Console 建立 Project
@@ -89,7 +92,7 @@ __不要使用 Ubuntu 的安裝作法：
 
 3. 設定 Google Console Project ID
 
-  __gcloud config set project <<PROJECT-ID>>__
+  __gcloud config set project [PROJECT-ID]__
 
 	```
 	alanjui@SRV01:~/workspace/Google-Cloud/1-hello-world$  gcloud config set project  myapp001-1049
@@ -127,13 +130,19 @@ __不要使用 Ubuntu 的安裝作法：
 
 
 
-# 異常狀況紀錄
+# 附帶參考
 
-# Mac 環境
+## 在 Mac 環境安裝 Google Cloud SDK
 
-## 佈署時無法正常運作
+__安裝操作參考__
 
-執行初次佈署指令： gcloud preview app deploy app.yaml --set-default ，卻是發生異常結果。
+[https://cloud.google.com/sdk/](https://cloud.google.com/sdk/)
+
+## 佈署 Web App 無法正常運作
+
+執行以下佈署指令，結果卻發生異常：
+
+__gcloud preview app deploy app.yaml --set-default__
 
 ```
 MAC2012:1-hello-world AlanJui$ gcloud preview app deploy app.yaml --set-default
@@ -151,38 +160,6 @@ ERROR: (gcloud.preview.app.deploy) Couldn't connect to the docker daemon.
 MAC2012:1-hello-world AlanJui$
 ```
 
-# Ubuntu 環境
+以上的問題，似乎係因 Docker Daemon 無法正常運作所引起。
 
-## 佈署時無法正常運作
-
-同 Mac ，一樣無法正常佈署，但狀況有兩種：
-
-### 狀況一：使用一般 Linux 的方法，完成 SDK 的安裝：
-
-得到同 Mac 的「異常狀況」。
-
-### 狀況二：使用 Ubuntu 專用的方法，完成 SDK 的安裝：
-
-```
-alanjui@SRV01:~/workspace/Google-Cloud/myApp101$ gcloud preview app deploy app.yaml --set-default
-You do not currently have this command group installed.  Using it
-requires the installation of components: [preview]
-You cannot perform this action because this Cloud SDK installation is
-managed by an external package manager.  If you would like to get the
-latest version, please see our main download page at:
-
-https://developers.google.com/cloud/sdk/
-
-ERROR: (gcloud) The component manager is disabled for this installation
-alanjui@SRV01:~/workspace/Google-Cloud/myApp101$
-
-```
-
-問題的導因，似乎是指 SDK 套件中的某些元件沒安裝，故而透過「Ubuntu軟體中心」，安裝了如下的原件：
-
- * Configuration for ubuntu on Google Engine: gce-cloud-config
- * Google daemon for configuring instances: gce-daemon
- * Bundle image for use on Google Compute Engine: gce-imagebundle
- * Google Compute Engine Start-up scripts: gce-stargup-scripts
-
->
+試用 Docker Tool for Mac OS X V1.8.1b ，結果，也無法順利啟動其預設的 Docker Container -- Default 。似乎 Docker 在 Mac 的運作，還不算穩定。
