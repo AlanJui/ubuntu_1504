@@ -1,4 +1,4 @@
-styles.lessUbuntu 15.04 安裝筆記
+Ubuntu 15.04 安裝筆記
 --------------------
 
 # 安裝 fcitx 中文輸入法
