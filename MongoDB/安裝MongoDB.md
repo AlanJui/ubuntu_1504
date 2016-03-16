@@ -1,92 +1,106 @@
-安裝及設定 MongoDB
-=================
+# MongoDB 安裝及設定作業
 
-# 安裝 MongoDB 套件
+## 安裝 MongoDB 套件
 
 參考指引： [Install MongoDB From Tarball ](http://docs.mongodb.org/manual/tutorial/install-mongodb-on-linux/)
 
 
-(1) 下載 BIN 檔案。
-```
-curl -O https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.0.5.tgz
-```
+ 1. 下載 BIN 檔案。
 
-(2) 解壓縮。
-```
-tar -zxvf mongodb-linux-x86_64-3.0.5.tgz
-```
+    ```
+    $ curl -O https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.0.5.tgz
+    ```
 
-(3) 將完成解壓縮的目錄，搬到欲安裝的路徑下。
-```
-mkdir -p ~/Applications/MongoDB
-cp -R -n mongodb-linux-x86_64-3.0.5/ ~/Applications/MongoDB
-```
+ 2. 解壓縮。
 
-(4) 設定CLI執行時所需的環境變數PATH
-```
-sudo gedit ~/.bashrc
-```
+    ```
+    $ tar -zxvf mongodb-linux-x86_64-3.0.5.tgz
+    ```
 
-設定內容：
-```
-# MongoDB
-export PATH=/home/alanjui/Applications/MongoDB/mongodb-linux-x86_64-3.0.5/bin:$PATH
+ 3. 將完成解壓縮的目錄，搬到欲安裝的路徑下。
 
-```
+    ```
+    $ mkdir -p ~/Applications/MongoDB
 
-(5) 重啟終端機的環境設定變更
-```
-alanjui@SRV01:~$ source ~/.bashrc
+    $ cp -R -n mongodb-linux-x86_64-3.0.5/* ~/Applications/MongoDB
+    ```
 
-alanjui@SRV01:~$ echo $PATH
-/home/alanjui/Applications/MongoDB/mongodb-linux-x86_64-3.0.5/bin:/home/alanjui/SDK/jdk1.7.0_79/bin:/home/alanjui/SDK/jdk1.7.0_79/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
-```
+ 4. 設定CLI執行時所需的環境變數PATH
 
-# 執行 MongoDB
+    使用 ZSH Shell：
 
-(1) 建立資料庫目錄（Data Directory）。
+    ```
+    $ gedit ~/.zshrc
+    ```
 
-```
-sudo mkdir -p /data/db
-```
+    使用 Bash Shell：
 
-/data目錄的權限設定：
-```
-alanjui@SRV01:~$ ls -al /data/
-總計 12
-drwxr-xr-x  3 root root 4096  8月 21 18:21 .
-drwxr-xr-x 25 root root 4096  8月 21 18:21 ..
-drwxr-xr-x  2 root root 4096  8月 21 18:21 db
-```
+    ```
+    $ gedit ~/.bashrc
+    ```
 
-未建「資料庫目錄」就直接啟動 mongod ，會發生如下的異常狀況：
-```
-alanjui@SRV01:~$ mongod
-2015-08-21T18:16:15.455+0800 I STORAGE  [initandlisten] exception in initAndListen: 29 Data directory /data/db not found., terminating
-2015-08-21T18:16:15.455+0800 I CONTROL  [initandlisten] dbexit:  rc: 100
-alanjui@SRV01:~$
-```
+    設定內容：
 
-(2) 設定資料庫目錄的使用權限。
+    ```
+    # MongoDB
+    export PATH=/home/alanjui/Applications/MongoDB/bin:$PATH
 
-(2-1) 透過「使用者及群組」，新增一「mongodb」群組, 並將「alanjui」帳號加入該群組中。
+    ```
 
-(2-2) 設定 mongodb 群祖擁有資料庫目錄的「讀/寫」使用權限。
+ 5. 重啟終端機的環境設定變更
 
-```
-sudo chown -R root:mongodb /data
+    ```
+    $ source ~/.zshrc
 
-alanjui@SRV01:~$ ls -l /data/
-總計 4
-drwxr-xr-x 2 root mongodb 4096  8月 21 18:21 db
+    $ echo $PATH
+    ```
 
-```
+## 執行 MongoDB
 
-(3) 啟動 mongod
+ 1. 建立資料庫目錄（Data Directory）。
 
-```
-mongod
-```
+    ```
+    $ sudo mkdir -p /data/db
+    ```
+
+    /data目錄的權限設定：
+
+    ```
+    $ ls -al /data/
+    總計 12
+    drwxr-xr-x  3 root root 4096  8月 21 18:21 .
+    drwxr-xr-x 25 root root 4096  8月 21 18:21 ..
+    drwxr-xr-x  2 root root 4096  8月 21 18:21 db
+    ```
+
+    未建「資料庫目錄」就直接啟動 mongod ，會發生如下的異常狀況：
+    ```
+    $ mongod
+    2015-08-21T18:16:15.455+0800 I STORAGE  [initandlisten] exception in initAndListen: 29 Data directory /data/db not found., terminating
+    2015-08-21T18:16:15.455+0800 I CONTROL  [initandlisten] dbexit:  rc: 100
+    alanjui@SRV01:~$
+    ```
+
+ 2. 設定資料庫目錄的使用權限。
+
+    (1) 透過「使用者及群組」，新增一「mongodb」群組, 並將「alanjui」帳號加入該群組中。
+
+    (2) 設定 mongodb 群祖擁有資料庫目錄的「讀/寫」使用權限。
+
+    ```
+    sudo chown -R root:mongodb /data
+
+    alanjui@SRV01:~$ ls -l /data/
+    總計 4
+    drwxr-xr-x 2 root mongodb 4096  8月 21 18:21 db
+
+    ```
+
+    (3) 啟動 mongod
+
+    ```
+    mongod
+    ```
 
 ===========================================================
 

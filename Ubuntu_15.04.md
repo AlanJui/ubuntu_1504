@@ -1,15 +1,39 @@
 Ubuntu 15.04 安裝筆記
 =====================
 
+# 設定 IP
+
+  1. 設定「有線網路」使用靜態IP
+      - IP: 192.168.66.10/24
+      - Default Gateway: 192.168.66.1
+
+  2. 登出再登入，以重新啟動 NIC
+
+
+# 安裝常用系統工具
+
+  × wget
+  × git
+
+  ```
+  ＄ sudo apt-get install wget git-core
+  ```
+
 # 安裝 fcitx 中文輸入法
 
   1. 執行「語言支援」
 
-  2. $ sudo apt-get install fcitx-table-cangjie5
+  2. 執行安裝指令
+
+  ```
+  $ sudo apt-get install fcitx-table-cangjie5
+
+  $ sudo apt-get install fcitx-googlepinyin
+  ```
 
   3. 登出，再登入
 
-  3. 使用「文字輸入」，加入「倉頡、拚音」。
+  4. 使用「文字輸入」設定：加入「倉頡、Google拚音」輸入法。
 
 # 設定 Screen Shot
 
@@ -23,11 +47,13 @@ Ubuntu 15.04 安裝筆記
 
   2. 運作方式／啟用工作區：勾選
 
-# 安裝 Chrome Web Browser  
+# 安裝常用文字編輯器（Editor）
 
-  使用 .deb 檔案安裝
+  × atom
+  × Sublime Text 3
+  × Visual Studio
 
-# 安裝 VisualStudio Code
+## 安裝 Visual Studio Code
 
   1. 解開壓縮檔到 ~/Applications
 
@@ -36,26 +62,42 @@ Ubuntu 15.04 安裝筆記
       $ sudo ln -s ~/Applications/VSCode-linux-x64/Code /usr/local/bin/code
       ```
 
-# 設定 IP
+# 安裝Oh-my-zsh
 
-  1. 設定「有線網路」使用靜態IP：192.168.99.10
 
-  2. 登出再登入，以重新啟動 NIC
+# 安裝 Chrome Web Browser  
+
+  使用 .deb 檔案安裝
+
+# 自動掛載第二台硬碟
+
+  1. 查第二台硬碟的UUID
+
+  ```
+  $ sudo blkid
+  ```
+
+  查 /dev/sdb 的 UUID
+
+  2. 編輯設定檔 /etc/fstab
+
+  ```
+  $ sudo gedit /etc/fstab
+  ```
+
+  加入內容：
+  ```
+  # NAS01
+  UUID=9279ede9-49f6-44fe-b481-261500f67675	/media		ext4    defaults		0		2
+  ```
+
+  3. 第一次手動掛載硬碟
+
+  ```
+  $ sudo mount /media
+  ```
 
 # 安裝 Samba
-
-  1. 以指令安裝  
-  ```
-    $ sudo apt-get install samba
-  ```
-
-  2. 修改設定檔
-  
-     使用編輯器軟體，修改「設定檔」。
-     
-  ```
-    $ sudo code /etc/samba/smbd.conf
-  ```
 
 # 安裝文泉驛正黑體
 
@@ -67,7 +109,7 @@ Ubuntu 15.04 安裝筆記
 
 ```
   $ sudo apt-get install ttf-wqy-zenhei
-  
+
   $ sudo fc-cache -v
 ```
 

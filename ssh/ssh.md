@@ -1,15 +1,87 @@
-SSH 安裝與設定
-============
+# SSH 安裝與設定作業
 
-# 與 SSH 相關之目錄與檔案
+## 安裝
 
-## Server Site
+    ```
+    $ sudo apt-get install openssh-server openssh-client
+    ```
+## 設定
+
+    ```
+    $ sudo gedit /etc/ssh/sshd_config
+    ```
+
+    【設定內容】：
+
+    ```
+    ......
+    ......
+    ......
+
+    # What ports, IPs and protocols we listen for
+    Port 22
+
+    # Authentication:
+    LoginGraceTime 120
+    PermitRootLogin no
+
+    # Users
+    AllowUsers user1 user2
+    ```
+
+## 重啟服務
+
+    ```
+    $ sudo service ssh status
+    ```
+
+## 驗證
+
+
+    ```
+    $ ssh localhost
+
+    $ ssh-keygen
+
+    Generating public/private rsa key pair.
+    Enter file in which to save the key (/home/alanjui/.ssh/id_rsa):
+    Enter passphrase (empty for no passphrase):
+    Enter same passphrase again:
+    Your identification has been saved in /home/alanjui/.ssh/id_rsa.
+    Your public key has been saved in /home/alanjui/.ssh/id_rsa.pub.
+    The key fingerprint is:
+    04:73:ed:f7:cf:40:dc:50:ed:38:75:6c:da:98:51:38 alanjui@SRV01
+    The key's randomart image is:
+    +---[RSA 2048]----+
+    |      o ..     =+|
+    |       +  .   E *|
+    |        ..   . #.|
+    |       .  . . O +|
+    |        S  . o . |
+    |              o  |
+    |               + |
+    |                o|
+    |                 |
+    +-----------------+
+
+    $ ls -l .ssh/id_rsa*
+
+    -rw------- 1 alanjui alanjui 1679  8月 22 01:48 .ssh/id_rsa
+    -rw-r--r-- 1 alanjui alanjui  395  8月 22 01:48 .ssh/id_rsa.pub
+
+    ```
+
+
+
+## SSH 相關之目錄與檔案
+
+### Server Site
 
 Server Site 的設定檔：
 /etc/ssh/sshd_config
 
 
-## Client Site
+### Client Site
 
   * Client Site 的設定檔
 
@@ -23,7 +95,7 @@ Server Site 的設定檔：
 
     ~/.ssh/known_hosts
 
-# SSH Server 基本操作
+## SSH Server 基本操作
 
   * 啟動
   ```
@@ -35,7 +107,7 @@ Server Site 的設定檔：
   sudo service ssh status
   ```
 
-# Client 端連線設定
+## SSH Client 端連線設定
 
 將 Cleint 端送交的「公鑰檔案」（.pub）以「添加」作法，放入 ~/.ssh/authorized_keys 檔案中。
 
