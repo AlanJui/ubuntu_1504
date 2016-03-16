@@ -1,20 +1,14 @@
-# Ubuntu 15.04
+# 文件摘要
 
-# Git 簽名
+## 說明
 
-```
-alanjui@SRV01:~/workspace/Ubuntu_1504$ git config --global user.email "alanjui.1960@gamil.com"
+本專案為 Ubuntu 15.10 的「安裝及設定作業指引」。
 
-alanjui@SRV01:~/workspace/Ubuntu_1504$ git config --global user.name "Alan Jui"
-```
+文件的主要目的：在 PC 電腦，安裝及設定「開發平台」，以為「程式設計人員」日常作業所用。
 
-# 首次納管
 
-```
-echo "# Ubuntu 15.04" >> README.md
-git init
-git add .
-git commit -m "first commit"
-git remote add origin git@github.com:AlanJui/ubuntu_1504.git
-git push -u origin master
-```
+## 目標
+
+ - MEAN Stack
+ - Android App
+ - Ionic App
