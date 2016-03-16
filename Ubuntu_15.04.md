@@ -41,7 +41,7 @@ Ubuntu 15.04 安裝筆記
 
   2. 鎖定在啟動欄
 
-# 設定工作區
+# 啟用「工作區」
 
   1. Ubuntu Search / 外觀（Appearance）
 
