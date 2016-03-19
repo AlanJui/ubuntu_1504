@@ -38,6 +38,8 @@ sudo apt-get install lib32z1
 
 ~/SDK/android-sdk-linux/tools/mksdcard: 755
 
+`註`： [參考文章](http://stackoverflow.com/questions/3878445/ubuntu-error-failed-to-create-the-sd-card)
+
 ### 晝面 Render 有問題
 
 ```
@@ -58,3 +60,9 @@ Rendering Layout 功能，預設會啟用：「Automatically Pick Best」。
 ![](http://i.stack.imgur.com/3HF0n.png)
 
 http://stackoverflow.com/questions/35914758/xml-rendering-errors-android-preview-n
+
+## 參考資訊
+
+### Android SDK 運作的環境標準
+
+![](./img/2016-03-19 12-25-26 的螢幕擷圖.png)

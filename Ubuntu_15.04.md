@@ -14,6 +14,7 @@ Ubuntu 15.04 安裝筆記
 
   × wget
   × git
+  * tree
 
   ```
   ＄ sudo apt-get install wget git-core
